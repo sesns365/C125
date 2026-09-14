@@ -835,7 +835,7 @@
           if (token === "\n") {
             segments.push({ br: true });
           } else if (token === "□") {
-            if (raw.includes("打X")) {
+            if (/請在(?:此)?□打X/.test(raw)) {
               segments.push({ text: checkedOf(`mark-mode-${checkId}`) ? "X" : "□" });
             } else {
               boxIndex += 1;
