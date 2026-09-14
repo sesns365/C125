@@ -131,8 +131,8 @@
     .question-choice-label { display: inline-flex; align-items: center; vertical-align: middle; margin: 0 2px; cursor: pointer; }
     .detail-choice { position: absolute; opacity: 0; width: 1px; height: 1px; }
     .detail-choice:focus-visible + .visual-check { outline: 3px solid #93c5fd; outline-offset: 2px; }
-    .detail-choice:checked + .visual-check { background: #fff4f2; border-color: #c0392b; }
-    .detail-choice:checked + .visual-check::after { content: "X"; color: #c0392b; font-weight: 900; font-size: 15px; line-height: 1; }
+    .detail-choice:checked + .visual-check { background: var(--green); border-color: var(--green); }
+    .detail-choice:checked + .visual-check::after { content: "✓"; color: white; font-weight: 900; font-size: 15px; line-height: 1; }
     .mark-mode-label { display: inline-flex; align-items: center; vertical-align: middle; margin: 0 2px; cursor: pointer; }
     .mark-mode-toggle { position: absolute; opacity: 0; width: 1px; height: 1px; }
     .mark-mode-toggle:focus-visible + .visual-check { outline: 3px solid #93c5fd; outline-offset: 2px; }
@@ -258,7 +258,7 @@
       .matrix-cell.not-applicable { background: #d5d5d5 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .score-check:checked + .visual-check { background: var(--green) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .score-check.x-mark:checked + .visual-check { background: #fff4f2 !important; border-color: #c0392b !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .detail-choice:checked + .visual-check { background: #fff4f2 !important; border-color: #c0392b !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .detail-choice:checked + .visual-check { background: var(--green) !important; border-color: var(--green) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .mark-mode-toggle:checked + .visual-check { background: #fff4f2 !important; border-color: #c0392b !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     }
   </style>
@@ -311,7 +311,7 @@
       <div class="info-row">
         <div class="info-cell">出生日期 :<input class="info-input date-year" type="text" data-save-key="birth-year" aria-label="出生年" autocomplete="off" spellcheck="false">年 <input class="info-input date-small" type="text" data-save-key="birth-month" aria-label="出生月" autocomplete="off" spellcheck="false">月 <input class="info-input date-small" type="text" data-save-key="birth-day" aria-label="出生日" autocomplete="off" spellcheck="false">日</div>
         <div class="info-cell">實際年齡 : <input class="info-input small" type="text" data-save-key="age" aria-label="實際年齡" autocomplete="off" spellcheck="false">歲</div>
-        <div class="info-cell">性    別：<label class="inline-choice"><input class="info-choice" type="radio" name="gender" data-save-key="gender-male" aria-label="男"><span class="visual-check small" aria-hidden="true"></span><span>男</span></label> <label class="inline-choice"><input class="info-choice" type="radio" name="gender" data-save-key="gender-female" aria-label="女"><span class="visual-check small" aria-hidden="true"></span><span>女</span></label></div>
+        <div class="info-cell">性    別：<label class="inline-choice"><input class="info-choice" type="checkbox" name="gender" data-save-key="gender-male" aria-label="男"><span class="visual-check small" aria-hidden="true"></span><span>男</span></label> <label class="inline-choice"><input class="info-choice" type="checkbox" name="gender" data-save-key="gender-female" aria-label="女"><span class="visual-check small" aria-hidden="true"></span><span>女</span></label></div>
       </div>
       <div class="info-row">
         <div class="info-cell">轉 介 者 :<input class="info-input medium" type="text" data-save-key="referrer" aria-label="轉介者" autocomplete="off" spellcheck="false"></div>
@@ -319,8 +319,8 @@
       </div>
       <div class="info-row">
         <div class="info-cell info-combined" style="grid-column: span 3;">
-          <span class="info-group"><span>身障手冊：</span><label class="inline-choice"><input class="info-choice" type="radio" name="handbook" data-save-key="handbook-none" aria-label="無"><span class="visual-check small" aria-hidden="true"></span><span>無</span></label> <label class="inline-choice"><input class="info-choice" type="radio" name="handbook" data-save-key="handbook-yes" aria-label="有"><span class="visual-check small" aria-hidden="true"></span><span>有</span></label>（類別: <input class="info-input medium" type="text" data-save-key="handbook-category" aria-label="身障手冊類別" autocomplete="off" spellcheck="false">，程度:<input class="info-input small" type="text" data-save-key="handbook-level" aria-label="身障手冊程度" autocomplete="off" spellcheck="false">）</span>
-          <span class="info-group"><span>重大傷病卡：</span><label class="inline-choice"><input class="info-choice" type="radio" name="major-illness" data-save-key="major-illness-none" aria-label="無"><span class="visual-check small" aria-hidden="true"></span><span>無</span></label> <label class="inline-choice"><input class="info-choice" type="radio" name="major-illness" data-save-key="major-illness-yes" aria-label="有"><span class="visual-check small" aria-hidden="true"></span><span>有</span></label>（病名：<input class="info-input wide" type="text" data-save-key="major-illness-name" aria-label="重大傷病卡病名" autocomplete="off" spellcheck="false">）</span>
+          <span class="info-group"><span>身障手冊：</span><label class="inline-choice"><input class="info-choice" type="checkbox" name="handbook" data-save-key="handbook-none" aria-label="無"><span class="visual-check small" aria-hidden="true"></span><span>無</span></label> <label class="inline-choice"><input class="info-choice" type="checkbox" name="handbook" data-save-key="handbook-yes" aria-label="有"><span class="visual-check small" aria-hidden="true"></span><span>有</span></label>（類別: <input class="info-input medium" type="text" data-save-key="handbook-category" aria-label="身障手冊類別" autocomplete="off" spellcheck="false">，程度:<input class="info-input small" type="text" data-save-key="handbook-level" aria-label="身障手冊程度" autocomplete="off" spellcheck="false">）</span>
+          <span class="info-group"><span>重大傷病卡：</span><label class="inline-choice"><input class="info-choice" type="checkbox" name="major-illness" data-save-key="major-illness-none" aria-label="無"><span class="visual-check small" aria-hidden="true"></span><span>無</span></label> <label class="inline-choice"><input class="info-choice" type="checkbox" name="major-illness" data-save-key="major-illness-yes" aria-label="有"><span class="visual-check small" aria-hidden="true"></span><span>有</span></label>（病名：<input class="info-input wide" type="text" data-save-key="major-illness-name" aria-label="重大傷病卡病名" autocomplete="off" spellcheck="false">）</span>
         </div>
       </div></div>
       </section>
@@ -839,7 +839,7 @@
               segments.push({ text: checkedOf(`mark-mode-${checkId}`) ? "X" : "□" });
             } else {
               boxIndex += 1;
-              segments.push({ text: checkedOf(`detail-${checkId}-box-${boxIndex}`) ? "X" : "□" });
+              segments.push({ text: checkedOf(`detail-${checkId}-box-${boxIndex}`) ? "✓" : "□" });
             }
           } else {
             blankIndex += 1;
@@ -992,6 +992,7 @@
         });
         try {
           localStorage.setItem(storageKey, JSON.stringify({
+            version: 2,
             checks: checks.filter(c => c.checked).map(c => c.id),
             fields,
           }));
@@ -1004,9 +1005,11 @@
           const savedIds = new Set(Array.isArray(saved) ? saved : (Array.isArray(saved.checks) ? saved.checks : []));
           checks.forEach((check) => { check.checked = savedIds.has(check.id); });
           const fields = !Array.isArray(saved) && saved && typeof saved.fields === "object" ? saved.fields : {};
+          const canRestoreMarkModes = !Array.isArray(saved) && saved && saved.version >= 2;
           infoControls.forEach((control) => {
             const key = control.dataset.saveKey;
             if (!(key in fields)) return;
+            if (control.classList.contains("mark-mode-toggle") && !canRestoreMarkModes) return;
             const isChoice = control.type === "radio" || control.type === "checkbox";
             if (isChoice) control.checked = Boolean(fields[key]);
             else control.value = String(fields[key] ?? "");
@@ -1022,21 +1025,15 @@
       const choiceControls = infoControls.filter((control) => control.classList.contains("info-choice"));
       choiceControls.forEach((control) => {
         const choiceLabel = control.closest("label");
-        const rememberChoice = () => { control.dataset.wasChecked = String(control.checked); };
-        [control, choiceLabel].filter(Boolean).forEach((element) => {
-          element.addEventListener("pointerdown", rememberChoice);
-          element.addEventListener("mousedown", rememberChoice);
-        });
-        control.addEventListener("keydown", (event) => {
-          if (event.key === " " || event.key === "Enter") rememberChoice();
-        });
-        control.addEventListener("click", (event) => {
-          if (control.dataset.wasChecked === "true") {
-            event.preventDefault();
-            control.checked = false;
-            saveState();
-          }
-          delete control.dataset.wasChecked;
+        if (!choiceLabel) return;
+        choiceLabel.addEventListener("click", (event) => {
+          event.preventDefault();
+          const wasChecked = control.checked;
+          choiceControls
+            .filter((other) => other.name === control.name)
+            .forEach((other) => { other.checked = false; });
+          control.checked = !wasChecked;
+          saveState();
         });
       });
       const markModeControls = infoControls.filter((control) => control.classList.contains("mark-mode-toggle"));
