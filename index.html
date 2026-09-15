@@ -906,7 +906,7 @@
         subtotalCells.forEach((cell, index) => {
           const categoryId = `s${sectionNumber}c${index + 1}`;
           const denominator = nodeText(cell).trim();
-          const count = sectionElement ? Array.from(sectionElement.querySelectorAll(`.score-check[data-category="${categoryId}"]`)).filter((control) => control.checked).length : 0;
+          const count = sectionElement ? Array.from(sectionElement.querySelectorAll(`.score-check[data-category="${categoryId}"]`)).filter((control) => control.checked && !control.classList.contains("x-mark")).length : 0;
           setCellText(cell, `${count}${denominator}`, xmlDocument);
         });
       }
@@ -929,10 +929,11 @@
         function fillCategory(categoryId, rowIndex, offset) {
           const cells = directElements(rows[rowIndex], "tc");
           const selected = checks.filter(c => c.dataset.category === categoryId && c.checked);
+          const scored = selected.filter(c => !c.classList.contains("x-mark"));
           const numbers = selected.map(c => c.id.split("-q")[1] + (c.classList.contains("x-mark") ? "(X)" : ""));
           const denominator = nodeText(cells[offset + 3]).trim().normalize("NFKC");
           setCellText(cells[offset + 2], numbers.join("、"), xmlDocument);
-          setCellText(cells[offset + 3], `${selected.length}${denominator}`, xmlDocument);
+          setCellText(cells[offset + 3], `${scored.length}${denominator}`, xmlDocument);
           for (const run of Array.from(cells[offset + 3].getElementsByTagNameNS(W_NS, "r"))) {
             let properties = directElements(run, "rPr")[0];
             if (!properties) {
@@ -1012,7 +1013,7 @@
         let selected = 0;
         for (const check of checks) {
           setSelectedRow(check);
-          if (!check.checked) continue;
+          if (!check.checked || check.classList.contains("x-mark")) continue;
           selected += 1;
           const category = check.dataset.category;
           const section = check.dataset.section;
